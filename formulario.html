@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Evaluación del Sitio - Pastelería Chamoy</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #fff4fa;
+        padding: 20px;
+    }
+    section {
+        background: white;
+        padding: 25px;
+        max-width: 600px;
+        margin: auto;
+        border-radius: 12px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+        color: #d63384;
+        text-align: center;
+    }
+    input, select, textarea {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 15px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+    }
+    .boton {
+        background: #d63384;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        width: 100%;
+        cursor: pointer;
+        font-size: 16px;
+        border-radius: 6px;
+    }
+    .boton:hover {
+        background: #b82d72;
+    }
+    .mensaje {
+        background: #e6ffe6;
+        padding: 12px;
+        border-left: 5px solid #33a133;
+        margin-bottom: 20px;
+        border-radius: 6px;
+        font-size: 15px;
+    }
+</style>
+
+</head>
+<body>
+
+<section id="evaluacion">
+  <h2>Formulario de Evaluación del Sitio Web</h2>
+
+  <p>Ayúdanos a mejorar tu experiencia en <b>Pastelería Chamoy</b> respondiendo estas preguntas:</p>
+
+  <!-- MENSAJE MOSTRADO SOLO CUANDO SE ENVÍA -->
+  <div id="mensaje" class="mensaje" style="display:none;"></div>
+
+  <form id="formEval">
+
+    <label>1. Nombre completo:</label>
+    <input type="text" name="nombreEval" required>
+
+    <label>2. Correo electrónico:</label>
+    <input type="email" name="correoEval" required>
+
+    <label>3. ¿Cómo calificarías el diseño del sitio web?</label>
+    <select name="diseno" required>
+      <option value="">Selecciona una opción</option>
+      <option value="Excelente">Excelente</option>
+      <option value="Bueno">Bueno</option>
+      <option value="Regular">Regular</option>
+      <option value="Malo">Malo</option>
+    </select>
+
+    <label>4. ¿Te resultó fácil navegar entre las secciones?</label>
+    <select name="navegacion" required>
+      <option value="">Selecciona una opción</option>
+      <option value="Muy fácil">Muy fácil</option>
+      <option value="Fácil">Fácil</option>
+      <option value="Difícil">Difícil</option>
+      <option value="Muy difícil">Muy difícil</option>
+    </select>
+
+    <label>5. ¿Qué opinas de la velocidad de carga de la página?</label>
+    <select name="velocidad" required>
+      <option value="">Selecciona una opción</option>
+      <option value="Rápida">Rápida</option>
+      <option value="Aceptable">Aceptable</option>
+      <option value="Lenta">Lenta</option>
+    </select>
+
+    <label>6. ¿Qué tan clara te pareció la información sobre los pasteles?</label>
+    <select name="informacion" required>
+      <option value="">Selecciona una opción</option>
+      <option value="Muy clara">Muy clara</option>
+      <option value="Clara">Clara</option>
+      <option value="Poco clara">Poco clara</option>
+      <option value="Confusa">Confusa</option>
+    </select>
+
+    <label>7. ¿Te pareció útil el apartado de compra o reserva?</label><br>
+    <input type="radio" name="utilCompra" value="Sí" required> Sí
+    <input type="radio" name="utilCompra" value="No"> No
+    <br><br>
+
+    <label>8. Información del blog sobre donación de sangre:</label>
+    <select name="donacion" required>
+      <option value="">Selecciona una opción</option>
+      <option value="Interesante y educativa">Interesante y educativa</option>
+      <option value="Buena pero puede mejorar">Buena pero puede mejorar</option>
+      <option value="No me interesó mucho">No me interesó mucho</option>
+    </select>
+
+    <label>9. ¿Recomendarías esta página?</label><br>
+    <input type="radio" name="recomendar" value="Sí" required> Sí
+    <input type="radio" name="recomendar" value="No"> No
+    <br><br>
+
+    <label>10. Comentarios o sugerencias:</label>
+    <textarea name="comentarios" rows="4"></textarea>
+
+    <button class="boton" type="submit">Enviar evaluación</button>
+  </form>
+
+</section>
+
+<script>
+document.getElementById("formEval").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const form = new FormData(this);
+    const nombre = form.get("nombreEval");
+
+    document.getElementById("mensaje").style.display = "block";
+    document.getElementById("mensaje").innerHTML =
+        "¡Gracias, <b>" + nombre + "</b>! Tu evaluación ha sido enviada correctamente. 🍰";
+
+    this.reset();
+});
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pastelería Chamoy</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    background: #fffaf5;
+    color: #333;
+  }
+  header {
+    background: linear-gradient(135deg, #f08a24, #f6b26b);
+    color: white;
+    text-align: center;
+    padding: 30px 10px;
+  }
+  header h1 { margin: 0; font-size: 2em; }
+
+  nav {
+    background: #ffd6a5;
+    text-align: center;
+    padding: 10px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  nav a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+    transition: color 0.3s;
+  }
+  nav a:hover { color: #f08a24; }
+
+  section {
+    padding: 30px 15px;
+    text-align: center;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+  section.active {
+    display: block;
+    opacity: 1;
+  }
+
+  .pasteles {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+  .pastel {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    width: 280px;
+    padding: 15px;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .pastel:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  }
+  .pastel img {
+    width: 100%;
+    border-radius: 10px;
+  }
+  .pastel h3 { color: #f08a24; margin: 10px 0 5px; }
+
+  .boton {
+    background: #f57224;
+    border: none;
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+    transition: background 0.3s;
+  }
+  .boton:hover { background: #d85e1c; }
+
+  input, select, textarea {
+    width: 90%;
+    margin: 6px 0;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+
+  footer {
+    background: #f08a24;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: 30px;
+  }
+
+  @media (max-width:600px){
+    .pastel { width: 90%; }
+  }
+
+  /* Botón de blog */
+  #btnDonacion {
+    background: #c0392b;
+    color: #fff;
+    display: block;
+    margin: 10px auto;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  #btnDonacion:hover { background: #a93226; }
+
+  .imagen-blog {
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+    margin: 15px auto;
+    display: block;
+  }
+
+  ul, ol {
+    text-align: left;
+    display: inline-block;
+  }
+
+  iframe {
+    width: 90%;
+    max-width: 600px;
+    height: 340px;
+    border: none;
+    border-radius: 10px;
+    margin: 15px auto;
+    display: block;
+  }
+</style>
+</head>
+<body>
+
+<button id="btnDonacion" onclick="mostrar('donacion')">¿Quieres saber sobre la donación de sangre?</button>
+
+<header>
+  <h1>Pastelería Chamoy</h1>
+  <p>creamos pasteles desde 2025 y esto va referente a una pastelería digital donde puedes comprar y reservar el pastel que desees</p>
+</header>
+
+<nav>
+  <a href="#" onclick="mostrar('inicio')">Inicio</a>
+  <a href="#" onclick="mostrar('menu')">Menú</a>
+  <a href="#" onclick="mostrar('sobre')">Sobre Nosotros</a>
+  <a href="#" onclick="mostrar('contacto')">Contacto</a>
+</nav>
+
+<!-- INICIO -->
+<section id="inicio">
+  <h2>Bienvenido a Pastelería Chamoy</h2>
+  <p>Endulzamos tus celebraciones con amor, creatividad y sabor artesanal.</p>
+
+  <div class="pasteles">
+    <div class="pastel">
+      <img src="chocolate.png" alt="Pastel de Chocolate">
+      <h3>Pastel de Chocolate</h3>
+      <p>Bizcocho húmedo con ganache intenso de cacao y relleno de cacao.</p>
+      <button class="boton" onclick="abrirCompra('Pastel de Chocolate')">Comprar</button>
+      <button class="boton" onclick="abrirReserva('Pastel de Chocolate')">Reservar</button>
+    </div>
+    <div class="pastel">
+      <img src="fresa.png" alt="Cheesecake de Fresa">
+      <h3>Cheesecake de Fresa</h3>
+      <p>Base crujiente con crema suave y fresas naturales.</p>
+      <button class="boton" onclick="abrirCompra('Cheesecake de Fresa')">Comprar</button>
+      <button class="boton" onclick="abrirReserva('Cheesecake de Fresa')">Reservar</button>
+    </div>
+    <div class="pastel">
+      <img src="vainilla.png" alt="Pastel de Vainilla">
+      <h3>Pastel de Vainilla</h3>
+      <p>Suave bizcocho con crema batida.</p>
+      <button class="boton" onclick="abrirCompra('Pastel de Vainilla')">Comprar</button>
+      <button class="boton" onclick="abrirReserva('Pastel de Vainilla')">Reservar</button>
+    </div>
+  </div>
+</section>
+
+<!-- MENÚ -->
+<section id="menu">
+  <h2>Nuestros Pasteles</h2>
+  <p>Descubre nuestras creaciones más deliciosas, hechas con ingredientes frescos y mucho cariño.</p>
+  <div class="pasteles">
+    <div class="pastel">
+      <img src="chocolate.png" alt="Pastel de Chocolate">
+      <h3>Pastel de Chocolate</h3>
+      <p>Bizcocho húmedo con ganache intenso de cacao.</p>
+      <button class="boton" onclick="abrirCompra('Pastel de Chocolate')">Comprar</button>
+      <button class="boton" onclick="abrirReserva('Pastel de Chocolate')">Reservar</button>
+    </div>
+    <div class="pastel">
+      <img src="fresa.png" alt="Cheesecake de Fresa">
+      <h3>Cheesecake de Fresa</h3>
+      <p>Base crujiente con crema suave y fresas naturales.</p>
+      <button class="boton" onclick="abrirCompra('Cheesecake de Fresa')">Comprar</button>
+      <button class="boton" onclick="abrirReserva('Cheesecake de Fresa')">Reservar</button>
+    </div>
+    <div class="pastel">
+      <img src="vainilla.png" alt="Pastel de Vainilla">
+      <h3>Pastel de Vainilla</h3>
+      <p>Suave bizcocho con crema batida.</p>
+      <button class="boton" onclick="abrirCompra('Pastel de Vainilla')">Comprar</button>
+      <button class="boton" onclick="abrirReserva('Pastel de Vainilla')">Reservar</button>
+    </div>
+  </div>
+</section>
+
+<!-- COMPRA -->
+<section id="comprar">
+  <h2>Comprar pastel</h2>
+  <p id="productoSel"></p>
+  <form id="formCompra">
+    <input type="text" placeholder="Nombre completo" required><br>
+    <input type="email" placeholder="Correo electrónico" required><br>
+    <select id="metodo" onchange="mostrarPago()" required>
+      <option value="">Método de pago</option>
+      <option value="efectivo">Efectivo</option>
+      <option value="tarjeta">Tarjeta</option>
+    </select><br>
+    <div id="tarjeta" style="display:none;">
+      <input type="text" placeholder="Número de tarjeta" maxlength="16"><br>
+      <input type="text" placeholder="MM/AA"><br>
+      <input type="text" placeholder="CVV" maxlength="3"><br>
+    </div>
+    <button class="boton" type="submit">Finalizar compra</button>
+  </form>
+  <div id="ticket"></div>
+</section>
+
+<!-- RESERVA -->
+<section id="reservar">
+  <h2>Reservar pastel</h2>
+  <p id="productoReserva"></p>
+  <form id="formReserva">
+    <input type="text" placeholder="Nombre completo" required><br>
+    <input type="email" placeholder="Correo electrónico" required><br>
+    <label>Fecha de entrega:</label><br>
+    <input type="date" id="fecha" required><br>
+    <select id="metodoReserva" onchange="mostrarPagoReserva()" required>
+      <option value="">Método de pago</option>
+      <option value="efectivo">Efectivo</option>
+      <option value="tarjeta">Tarjeta</option>
+    </select><br>
+    <div id="tarjetaReserva" style="display:none;">
+      <input type="text" placeholder="Número de tarjeta" maxlength="16"><br>
+      <input type="text" placeholder="MM/AA"><br>
+      <input type="text" placeholder="CVV" maxlength="3"><br>
+    </div>
+    <button class="boton" type="submit">Confirmar reserva</button>
+  </form>
+  <div id="confirmacionReserva"></div>
+</section>
+
+<!-- SOBRE NOSOTROS -->
+<section id="sobre">
+  <h2>Sobre Nosotros</h2>
+  <p>En <b>Pastelería Chamoy</b> horneamos sonrisas desde 2025. Cada pastel es una obra artesanal llena de cariño y creatividad por nuestros pasteleros.</p>
+  <h3>Reseñas de nuestros clientes</h3>
+  <div id="reseñas">
+    <p><b>Ana:</b> ¡El pastel de fresa fue espectacular!</p>
+    <p><b>Carlos:</b> Excelente atención y sabor. Repetiré pronto.</p>
+  </div>
+  <h4>Escribe tu reseña</h4>
+  <textarea id="nuevaReseña" placeholder="Tu opinión..." rows="3"></textarea><br>
+  <button class="boton" onclick="agregarReseña()">Enviar</button>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <h2>Contáctanos</h2>
+  <p>Avenida Insurgentes S/N, Ecatepec de Morelos 55020<br>Tel: 55 1234 5678<br>Email: PASTELERIACHAMOY157@gmail.com</p>
+</section>
+
+<!-- BLOG DE DONACIÓN DE SANGRE MEJORADO -->
+<section id="donacion">
+  <h2>Blog: Donación de Sangre</h2>
+
+  <img src="sangre1.png" alt="Donación de sangre" class="imagen-blog">
+
+  <p>La donación de sangre es un acto voluntario y solidario que puede salvar hasta tres vidas por cada donación. Según la <b>Organización Mundial de la Salud (OMS)</b>, más de 120 millones de donaciones son necesarias cada año para atender emergencias, cirugías, partos complicados y tratamientos de cáncer. A pesar de su importancia, menos del 3% de la población mundial dona sangre de manera habitual.</p>
+
+  <h3>Importancia de conocer tu tipo de sangre</h3>
+  <p>Conocer tu tipo sanguíneo —A+, A-, B+, B-, AB+, AB-, O+ u O— es esencial tanto para donar como para recibir sangre de manera segura. El tipo O- es el <b>donante universal</b>, y el AB+ es el <b>receptor universal</b>. En situaciones de emergencia, esta información puede marcar la diferencia entre la vida y la muerte.</p>
+
+  <h3>Beneficios para el donante</h3>
+  <ul>
+    <li>Estimula la producción de nuevas células sanguíneas.</li>
+    <li>Ayuda a mantener niveles saludables de hierro.</li>
+    <li>Permite obtener un chequeo médico gratuito en cada donación.</li>
+    <li>Genera bienestar emocional al contribuir a una causa solidaria.</li>
+  </ul>
+
+  <h3>Proceso de donación</h3>
+  <ol style="text-align:left; display:inline-block;">
+    <li><b>Registro:</b> El donante llena un formulario con datos personales y de salud.</li>
+    <li><b>Evaluación médica:</b> Se realiza una revisión física y una entrevista breve.</li>
+    <li><b>Extracción:</b> Se extraen 450 ml de sangre en un entorno estéril y seguro.</li>
+    <li><b>Recuperación:</b> Se recomienda descansar e hidratarse tras donar.</li>
+  </ol>
+
+  <h3>Consejos antes y después de donar</h3>
+  <ul>
+    <li>Descansa al menos 6 horas antes de donar.</li>
+    <li>Desayuna ligero y evita grasas antes del proceso.</li>
+    <li>Toma agua suficiente antes y después.</li>
+    <li>Evita esfuerzos físicos fuertes durante 24 horas posteriores.</li>
+  </ul>
+
+  <img src="sangre2.png" alt="Tipos de sangre" class="imagen-blog">
+
+  <h3>¿Dónde donar sangre en México?</h3>
+  <ul>
+    <li>Centros Estatales de Transfusión Sanguínea (CETS).</li>
+    <li>Hospitales del IMSS, ISSSTE y Secretaría de Salud.</li>
+    <li>Cruz Roja Mexicana.</li>
+    <li>Campañas universitarias y empresariales móviles.</li>
+  </ul>
+
+  <h3>Video informativo</h3>
+  <iframe src="https://www.youtube.com/embed/U9P0fKiB7kM" title="Video sobre la importancia de donar sangre" allowfullscreen></iframe>
+
+  <h3>Reflexión final</h3>
+  <p>Donar sangre no cuesta nada, pero puede significar todo para quien la recibe. Un pequeño gesto puede salvar vidas, fortalecer comunidades y construir esperanza. La próxima vez que tengas la oportunidad, ¡dona vida, dona sangre!</p>
+
+  <h3>Fuentes consultadas</h3>
+  <ul style="font-size:0.9em;">
+    <li>Organización Mundial de la Salud (2023). <i>Blood safety and availability.</i> Disponible en: <a href="https://www.who.int/es/news-room/fact-sheets/detail/blood-safety-and-availability" target="_blank">OMS</a></li>
+    <li>Cruz Roja Mexicana (2024). <i>Campañas de donación voluntaria.</i> Disponible en: <a href="https://www.cruzrojamexicana.org.mx/" target="_blank">cruzrojamexicana.org.mx</a></li>
+    <li>Secretaría de Salud (México) (2024). <i>Guía del donante de sangre.</i> Disponible en: <a href="https://www.gob.mx/salud" target="_blank">gob.mx/salud</a></li>
+  </ul>
+
+  <button class="boton" onclick="mostrar('inicio')">Regresar a la pastelería</button>
+</section>
+
+<footer>© 2025 Pastelería Chamoy - ¡Compra aquí o te hacemos Chamoy!</footer>
+
+<script>
+function mostrar(id){
+  document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+}
+
+function abrirCompra(p){
+  mostrar('comprar');
+  document.getElementById('productoSel').innerText = 'Producto: ' + p;
+  document.getElementById('ticket').innerHTML = '';
+}
+
+function abrirReserva(p){
+  mostrar('reservar');
+  document.getElementById('productoReserva').innerText = 'Producto a reservar: ' + p;
+  document.getElementById('confirmacionReserva').innerHTML = '';
+}
+
+function mostrarPago(){
+  document.getElementById('tarjeta').style.display =
+    document.getElementById('metodo').value === 'tarjeta' ? 'block' : 'none';
+}
+
+function mostrarPagoReserva(){
+  document.getElementById('tarjetaReserva').style.display =
+    document.getElementById('metodoReserva').value === 'tarjeta' ? 'block' : 'none';
+}
+
+document.getElementById('formCompra').onsubmit = e => {
+  e.preventDefault();
+  const metodo = document.getElementById('metodo').value;
+  const code = "COD" + Math.floor(Math.random() * 100000);
+  document.getElementById('ticket').innerHTML = metodo === 'efectivo'
+    ? `<p>Ticket generado<br><img src="codigo.png" width="120"><br>Código: ${code}</p>`
+    : `<p>Pago exitoso con tarjeta. ¡Gracias por tu compra!</p>`;
+};
+
+document.getElementById('formReserva').onsubmit = e => {
+  e.preventDefault();
+  const metodo = document.getElementById('metodoReserva').value;
+  const fecha = document.getElementById('fecha').value;
+  if(!fecha){ alert("Selecciona una fecha de reserva."); return; }
+  const code = "RES" + Math.floor(Math.random()*100000);
+  document.getElementById('confirmacionReserva').innerHTML = metodo === 'efectivo'
+    ? `<p>¡Reserva confirmada para el ${fecha}!<br><img src="codigo.png" width="120"><br>Código: ${code}</p>`
+    : `<p>Reserva pagada y confirmada para el ${fecha}. ¡Te esperamos!</p>`;
+};
+
+function agregarReseña(){
+  const texto = document.getElementById('nuevaReseña').value.trim();
+  if(texto){
+    const div = document.createElement('p');
+    div.innerHTML = `<b>Tú:</b> ${texto}`;
+    document.getElementById('reseñas').appendChild(div);
+    document.getElementById('nuevaReseña').value = '';
+  }
+}
+
+mostrar('inicio');
+</script>
+
+</body>
+</html>
